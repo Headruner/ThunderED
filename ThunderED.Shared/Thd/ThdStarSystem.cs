@@ -5,6 +5,7 @@ namespace ThunderED.Thd
     public class ThdStarSystem
     {
         public long RegionId { get; set; }
+        public long RegionName { get; set; }
         public long ConstellationId { get; set; }
         public long SolarSystemId { get; set; }
         public string SolarSystemName{ get; set; }

@@ -278,8 +278,15 @@ namespace ThunderED.API
                 var sys = ThdStarSystem.FromJson(result);
                 var cnst = await GetConstellationData(reason, sys.ConstellationId);
                 sys.RegionId = cnst?.RegionId ?? sys.RegionId;
-                return await DbHelper.SaveStarSystem(sys);
-            }
+                // sys.RegionName = cnst?.RegionName ?? sys.RegionName; // Removed because ThdStarConstellation does not have RegionName
+                // Fetch region name and store it with the StarSystem data
+                if (sys.RegionId > 0)
+                {
+                    var region = await GetRegionData(reason, sys.RegionId);
+                    sys.RegionId = region?.RegionId ?? sys.RegionId;
+                }
+            return await DbHelper.SaveStarSystem(sys);
+        }
 
             return null;
         }
