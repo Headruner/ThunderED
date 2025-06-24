@@ -583,6 +583,9 @@ namespace ThunderED.Modules
             var structureNameDirect = GetData("structureName", data);
             //parse structure name from link
             var sname2 = GetData("structureLink", data);
+            var constID = string.IsNullOrEmpty(constellationID) ? null : await APIHelper.ESIAPI.GetUniverseStructureData(Reason, constellationID, token);
+            var regionID = string.IsNullOrEmpty(regionID) ? null : await APIHelper.ESIAPI.GetUniverseStructureData(Reason, regionID, token);
+            var regionName = string.IsNullOrEmpty(regionID.name) ? null : await APIHelper.ESIAPI.GetUniverseStructureData(Reason, regionID.name, token);
 
             if (!string.IsNullOrEmpty(sname2) && string.IsNullOrEmpty(structureNameDirect))
             {
